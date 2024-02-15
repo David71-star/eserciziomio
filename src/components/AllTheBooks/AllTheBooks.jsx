@@ -1,32 +1,37 @@
-import booksFantasy from "./fantasy.json"
-import React from "react";
-import Container from "react-bootstrap/esm/Container";
-import CardsItemsChild from "./cardsItems";
-import { Col } from "react-bootstrap";
+import React, { useState } from 'react';
+import searchResults from "./fantasy.json";
 
+const BookSearch = ( books ) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
-
-
-const Cards = () => {
-    return (
-    <Container>
-        <div className="d-flex justify-content-center flex-wrap">
-        {booksFantasy.map(book => {
-        return (
-            <Col xs={12} md={4} lg={3}>
-                <CardsItemsChild 
-                category={book.category}
-                img={book.img}
-                price={book.price}
-                title={book.title}
-                />
-            </Col>
-        )   
-    })}
-       </div> 
-    </Container>
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    const results = books.filter(book =>
+      book.title.toLowerCase().includes(event.target.value.toLowerCase())
     );
+    setSearchResults(results);
+  };
 
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search books..."
+        value={searchTerm}
+        onChange={handleChange}
+      />
+      <ul>
+        {searchResults.map(book => (
+          <li key={book.asin}>
+            <img src={book.img} alt={book.title} />
+            <p>{book.title}</p>
+            <p>Price: ${book.price}</p>
+            <p>Category: {book.category}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
-
-export default Cards;
+export default BookSearch;
