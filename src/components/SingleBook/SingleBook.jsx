@@ -1,36 +1,22 @@
-import bookFantasy from "../AllTheBooks/fantasy.json"
 import React from "react";
-import Container from "react-bootstrap/esm/Container";
-import CardsItemsChild from "./CardItem";
-import { Col } from "react-bootstrap";
-import SearchTitleBook from "../AllTheBooks/input";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import CommentAreaModal from "../CommentArea/commentArea";
 
-
-
-
-const Singlecard= () => {
-    return (
-    <Container>
-        <SearchTitleBook />
-        <div className="d-flex justify-content-center flex-wrap">
-        {bookFantasy.map(book => {
-        return (
-            <Col xs={12} md={4} lg={3}>
-                <CardsItemsChild 
-                category={book.category}
-                img={book.img}
-                price={book.price}
-                title={book.title}
-                key={book.asin}
-                />
-            </Col>
-        )   
-    })}
-       </div> 
-    </Container>
-    );
-
+const SingleBook = ({ category, img, price, title, asin }) => {
+  return (
+    <>
+      <Card>
+        <Card.Img variant="top" src={img} />
+        <Card.Body>
+          <Card.Title className="text-truncate">{title}</Card.Title>
+          <Card.Text>{category}</Card.Text>
+          <Button variant="primary">{price}</Button>
+          <CommentAreaModal asin={asin} />
+        </Card.Body>
+      </Card>
+    </>
+  );
 };
 
-export default Singlecard;
-
+export default SingleBook;
