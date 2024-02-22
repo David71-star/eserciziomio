@@ -1,17 +1,21 @@
-// import AllTheBooks from "./components/AllTheBooks/AllTheBooks.jsx";
-import Down from "./components/MyFooter/myFooter.jsx";
-import Navigation from "./components/MyNav/MyNav.jsx";
-import Welcome from "./components/Welcome/welcome.jsx";
-import BookSearch from "./components/AllTheBooks/AllTheBooks.jsx";
+import AllTheBooks from "./COMPONENTS/ALLTHEBOOKS/allTheBooks.jsx";
+import MyFooter from "./COMPONENTS/FOOTER/footer.jsx";
+import MyNav from "./COMPONENTS/NAVBAR/navbar.jsx";
+import Welcome from "./COMPONENTS/WELCOME/welcome.jsx";
+import { SearchBookProvider } from "./COMPONENTS/CONTEXT/searchBooksContext";
 
 function App() {
   return (
-    <>
-      <Navigation />
-      <Welcome />
-      <BookSearch />
-      <Down />
-    </>
+    <div className="App">
+      <>
+        <SearchBookProvider>
+          <MyNav />
+          <Welcome />
+          <AllTheBooks />
+          <MyFooter />
+        </SearchBookProvider>
+      </>
+    </div>
   );
 }
 
