@@ -3,12 +3,23 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { SearchBooksContext } from "../CONTEXT/searchBooksContext";
+import { ThemeContext } from "../CONTEXT/ThemeContext";
+import "./navbar.module.css";
 
 const MyNav = () => {
   const { book, setBook } = useContext(SearchBooksContext);
+  const { isDarkModeActive, toggleDarkMode } = useContext(ThemeContext);
+
+  const generateSwitchLabel = () => {
+    return isDarkModeActive ? "LIght mode" : "Dark Mode";
+  };
+
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark">
+      <Navbar
+        bg={isDarkModeActive ? "dark" : "light"}
+        data-bs-theme={isDarkModeActive ? "dark" : "light"}
+      >
         <Container className="d-flex justify-content-around">
           <>
             <Navbar.Brand href="#">EPICBOOK</Navbar.Brand>
@@ -18,6 +29,7 @@ const MyNav = () => {
               <Nav.Link href="#">Browse</Nav.Link>
             </Nav>
           </>
+
           <input
             value={book}
             onChange={(e) => {
@@ -26,6 +38,9 @@ const MyNav = () => {
             type="text"
             placeholder="Cerca titolo"
           ></input>
+          <button className="ms-3" onClick={() => toggleDarkMode()}>
+            {generateSwitchLabel()}
+          </button>
         </Container>
       </Navbar>
     </>

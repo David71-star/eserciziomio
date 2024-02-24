@@ -1,12 +1,17 @@
 import Alert from "react-bootstrap/Alert";
-import React from "react";
+import React, { useContext } from "react";
 import { Container } from "react-bootstrap";
+import { ThemeContext } from "../CONTEXT/ThemeContext";
 
 function Welcome() {
+  const { isDarkModeActive } = useContext(ThemeContext);
+
   return (
     <>
       <Container>
-        <h1>BENVENUTO SU EPICBOOK ! </h1>
+        <h1 className={`text-${isDarkModeActive ? "light" : "dark"}`}>
+          BENVENUTO SU EPICBOOK !{" "}
+        </h1>
         <Alert variant="success">
           <Alert.Heading>
             BENVENUTO IN QUESTO <span>SHOP</span> DI LIBRI

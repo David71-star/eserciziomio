@@ -1,4 +1,4 @@
-import { Col, Container } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import arrayBooks from "../ASSETS/JSON/scifi.json";
 import React, { useContext } from "react";
 import "./allTheBooks.module.css";
@@ -8,7 +8,6 @@ import { SearchBooksContext } from "../CONTEXT/searchBooksContext";
 const AllTheBooks = () => {
   // const [value, setValue] = useState("");
   const { book } = useContext(SearchBooksContext);
-
   return (
     <>
       {/* <Container>
@@ -22,7 +21,7 @@ const AllTheBooks = () => {
           placeholder="Cerca titolo"
         ></input>
       </Container> */}
-      <Container className="d-flex justify-content-center flex-wrap">
+      <div className="d-flex justify-content-center flex-wrap w-50">
         {arrayBooks
           .filter((book1) =>
             book1.title.toLocaleLowerCase().includes(book.toLocaleLowerCase())
@@ -34,7 +33,7 @@ const AllTheBooks = () => {
               </Col>
             );
           })}
-      </Container>
+      </div>
     </>
   );
 };

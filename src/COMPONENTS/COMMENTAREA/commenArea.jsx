@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CommentList from "./commenst list";
 import AddComment from "./addComment";
 import Loading from "../SPINNER/spinner";
+import { SelectedContext } from "../CONTEXT/selectedContext";
 
-const CommentArea = ({ asin }) => {
+const CommentArea = () => {
+  const { selected } = useContext(SelectedContext);
+
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -11,7 +14,7 @@ const CommentArea = ({ asin }) => {
       setIsLoading(true);
       try {
         let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/comments/" + asin,
+          "https://striveschool-api.herokuapp.com/api/comments/" + selected,
           {
             headers: {
               Authorization:
@@ -30,14 +33,14 @@ const CommentArea = ({ asin }) => {
         setIsLoading(false);
       }
     };
-    if (asin) {
+    if (selected) {
       getFetchComments();
     }
-  }, [asin]);
+  }, [selected]);
   return (
-    <div className="text-center">
+    <div className="text-center w-50">
       {isLoading && <Loading />}
-      <AddComment asin={asin} />
+      <AddComment asin={selected} />
       <CommentList commentsToShow={comments} />
     </div>
   );
