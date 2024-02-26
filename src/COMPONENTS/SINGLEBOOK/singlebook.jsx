@@ -5,6 +5,7 @@ import { SelectedContext } from "../CONTEXT/selectedContext";
 
 function SingleBook({ book }) {
   const { setSelected, selected } = useContext(SelectedContext);
+  console.log(selected);
   return (
     <>
       <Card
