@@ -5,8 +5,9 @@ import Welcome from "./COMPONENTS/WELCOME/welcome.jsx";
 import { SearchBookProvider } from "./COMPONENTS/CONTEXT/searchBooksContext";
 import { useContext } from "react";
 import { ThemeContext } from "./COMPONENTS/CONTEXT/ThemeContext.js";
-import CommentArea from "./COMPONENTS/COMMENTAREA/commenArea.jsx";
-import { Container } from "react-bootstrap";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import BookDetails from "./COMPONENTS/BOOKDETAILS/BookDetails.jsx";
+import NotFound from "./COMPONENTS/NOTFOUND/NotFound.jsx";
 
 function App() {
   const { isDarkModeActive } = useContext(ThemeContext);
@@ -14,15 +15,18 @@ function App() {
   return (
     <div className={`App bg-${isDarkModeActive ? "dark" : "light"}`}>
       <>
-        <SearchBookProvider>
-          <MyNav />
-          <Welcome />
-          <Container className="d-flex justify-content-center">
-            <AllTheBooks />
-            <CommentArea />
-          </Container>
-          <MyFooter />
-        </SearchBookProvider>
+        <BrowserRouter>
+          <SearchBookProvider>
+            <MyNav />
+            <Welcome />
+            <Routes>
+              <Route path="/" element={<AllTheBooks />} />
+              <Route path="/details/:asin" element={<BookDetails />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <MyFooter />
+          </SearchBookProvider>
+        </BrowserRouter>
       </>
     </div>
   );

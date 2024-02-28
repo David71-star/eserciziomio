@@ -24,8 +24,8 @@ const MyNav = () => {
           <>
             <Navbar.Brand href="#">EPICBOOK</Navbar.Brand>
             <Nav className="me-auto">
-              <Nav.Link href="#">Home</Nav.Link>
-              <Nav.Link href="#">About</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/PIPPONE">About</Nav.Link>
               <Nav.Link href="#">Browse</Nav.Link>
             </Nav>
           </>

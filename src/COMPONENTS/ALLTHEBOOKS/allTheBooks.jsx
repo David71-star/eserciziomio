@@ -1,9 +1,10 @@
-import { Col } from "react-bootstrap";
+import { Col, Container } from "react-bootstrap";
 import arrayBooks from "../ASSETS/JSON/scifi.json";
 import React, { useContext } from "react";
 import "./allTheBooks.module.css";
 import SingleBook from "../SINGLEBOOK/singlebook";
 import { SearchBooksContext } from "../CONTEXT/searchBooksContext";
+import CommentArea from "../COMMENTAREA/commenArea";
 
 const AllTheBooks = () => {
   // const [value, setValue] = useState("");
@@ -21,19 +22,22 @@ const AllTheBooks = () => {
           placeholder="Cerca titolo"
         ></input>
       </Container> */}
-      <div className="d-flex justify-content-center flex-wrap w-50">
-        {arrayBooks
-          .filter((book1) =>
-            book1.title.toLocaleLowerCase().includes(book.toLocaleLowerCase())
-          )
-          .map((book1) => {
-            return (
-              <Col md={3} key={book1.asin}>
-                <SingleBook book={book1} />
-              </Col>
-            );
-          })}
-      </div>
+      <Container className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center flex-wrap w-50">
+          {arrayBooks
+            .filter((book1) =>
+              book1.title.toLocaleLowerCase().includes(book.toLocaleLowerCase())
+            )
+            .map((book1) => {
+              return (
+                <Col md={3} key={book1.asin}>
+                  <SingleBook book={book1} />
+                </Col>
+              );
+            })}
+        </div>
+        <CommentArea />
+      </Container>
     </>
   );
 };
